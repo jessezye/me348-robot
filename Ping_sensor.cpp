@@ -64,7 +64,23 @@ void Ping_sensor::read(void)
     }
     
     // Add QTI and IR reads here
-
+    // IR read
+  
+    low(26);                                      // D/A0 & D/A1 to 0 V
+ +  low(27);
+ +
+ +  
+ +    freqout(11, 1, 38000);                      // Left IR LED light
+ +    new_read.left_ir = input(10);                         // Check left IR detector
+ +
+ +    freqout(1, 1, 38000);                       // Repeat for right detector
+ +    new_read.right_ir = input(2);
+ +
+ +    print("%c irLeft = %d, irRight = %d",       // Display detector states
+ +           HOME,       irLeft,       irRight);
+ +    pause(100);                                 // Pause before repeating
+ +    
+ +   
     // Adds current read to data array
       data = new_read;
 //    distance_arr[count] = new_read;
